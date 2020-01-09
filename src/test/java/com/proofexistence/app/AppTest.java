@@ -1,38 +1,45 @@
 package com.proofexistence.app;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
+import java.math.BigInteger;
+
+import static org.hamcrest.CoreMatchers.containsString;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class AppTest {
+
+    private static final Logger log = LoggerFactory.getLogger(AppTest.class);
+    private String host = "http://localhost:20000"; // nodo besu 1
+    private String privateKey = "0xa4db817db6c69ef95682d2f9e60d46a3e6cd890f0f3d8226cade1711584fb313"; // Address => 0xafe7a39a573c49cce63a2294c74c2e8dde39d86a
+    private String privGroupId = "9rZVam9KVpcQ7aKQ1mSt53PQykutB8avqMizV50d9K8=";
+    private String privFrom = "A1aVtMxLCUHmBVHXoZzzBgPbW/wj5axDpW9X8l91SGo="; // Orion 1
+    private App app = new App(host, privateKey, privGroupId, privFrom);
+
+    private String hash = "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"; // test
+    private String contractAddress = "0x5bcfcbb1b27f390fc3f8a19fe686b9c9579ecfa5";
+
+    //@Test
+	public void deployContract() throws Exception {
+        String contractAddress = app.deployContract();
+        log.info("Address: " + contractAddress);
+		assertThat(contractAddress, containsString("0x"));
+    }
+    
+    //@Test
+    public void stampDocument() throws Exception {
+        String txHash = app.stampDocument(contractAddress, hash);
+        log.info("txHash: " + txHash);
+        assertThat(contractAddress, containsString("0x"));
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
+    //@Test
+    public void getTimeDocument() throws Exception {
+        BigInteger timeDocument = app.getTimeDocument(contractAddress, hash);
+        log.info("timeDocuement: " + timeDocument.intValue());
+        assertTrue(timeDocument.intValue() > 0);
     }
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
-    }
 }
