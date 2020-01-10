@@ -14,12 +14,12 @@ public class AppTest {
     private static final Logger log = LoggerFactory.getLogger(AppTest.class);
     private String host = "http://localhost:20000"; // nodo besu 1
     private String privateKey = "0xa4db817db6c69ef95682d2f9e60d46a3e6cd890f0f3d8226cade1711584fb313"; // Address => 0xafe7a39a573c49cce63a2294c74c2e8dde39d86a
-    private String privGroupId = "9rZVam9KVpcQ7aKQ1mSt53PQykutB8avqMizV50d9K8=";
+    private String privGroupId = "LOO+4JomlfJ3Q+SlaOkxRJkN9YCLeBPdxlf2M1+oc+A=";
     private String privFrom = "A1aVtMxLCUHmBVHXoZzzBgPbW/wj5axDpW9X8l91SGo="; // Orion 1
     private App app = new App(host, privateKey, privGroupId, privFrom);
 
-    private String hash = "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"; // test
-    private String contractAddress = "0x5bcfcbb1b27f390fc3f8a19fe686b9c9579ecfa5";
+    private String hash = "0x3fd54831f488a22b28398de0c567a3";
+    private String contractAddress = "0x2cd5ef75c0dbe8034a609304aeec33083ea67814";
 
     //@Test
 	public void deployContract() throws Exception {

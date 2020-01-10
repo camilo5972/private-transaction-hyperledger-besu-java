@@ -1,6 +1,7 @@
 package com.proofexistence.app;
 
 import java.math.BigInteger;
+import org.apache.commons.codec.binary.Hex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.web3j.protocol.http.HttpService;
@@ -69,6 +70,10 @@ public class App {
 		byte[] byteValueLen = new byte[lenght];
 		System.arraycopy(byteValue, 0, byteValueLen, 0, lenght);
 		return byteValueLen;
+    }
+    
+    public static String hashByteToString(byte[] hash) {
+        return new String(hash);
 	}
     
     public String deployContract() throws Exception {
@@ -79,6 +84,7 @@ public class App {
     public String stampDocument(String contractAddress, String hash) throws Exception {
         ProofOfExistence contract = ProofOfExistence.load(contractAddress, besu, transactionManager, getDefaultBesuPrivacyGasProvider());
         String encodeFunction = contract.stampDocument(stringToBytes(hash, 32)).encodeFunctionCall();
+        log.info("Hash document: " + hashByteToString(stringToBytes(hash, 32)));
         String txHash = sendPrivTransaction(contractAddress, encodeFunction);
         return hash;
     }
