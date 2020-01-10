@@ -18,7 +18,7 @@ public class AppTest {
     private String privFrom = "A1aVtMxLCUHmBVHXoZzzBgPbW/wj5axDpW9X8l91SGo="; // Orion 1
     private App app = new App(host, privateKey, privGroupId, privFrom);
 
-    private String hash = "0x3fd54831f488a22b28398de0c567a3";
+    private String hash = "0x3fd54831f488a22b28398de0c567a3"; // Data to stamp
     private String contractAddress = "0x2cd5ef75c0dbe8034a609304aeec33083ea67814";
 
     //@Test
