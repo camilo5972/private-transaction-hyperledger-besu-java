@@ -74,7 +74,11 @@ public class App {
     
     public static String hashByteToString(byte[] hash) {
         return new String(hash);
-	}
+    }
+    
+    public ProofOfExistence getContractInstance(String contractAddress) {
+        return ProofOfExistence.load(contractAddress, besu, transactionManager, getDefaultBesuPrivacyGasProvider());
+    }
     
     public String deployContract() throws Exception {
         ProofOfExistence contract = ProofOfExistence.deploy(besu, transactionManager, getDefaultBesuPrivacyGasProvider()).send();
@@ -82,7 +86,7 @@ public class App {
     }
 
     public String stampDocument(String contractAddress, String hash) throws Exception {
-        ProofOfExistence contract = ProofOfExistence.load(contractAddress, besu, transactionManager, getDefaultBesuPrivacyGasProvider());
+        ProofOfExistence contract = getContractInstance(contractAddress);
         String encodeFunction = contract.stampDocument(stringToBytes(hash, 32)).encodeFunctionCall();
         log.info("Hash document: " + hashByteToString(stringToBytes(hash, 32)));
         String txHash = sendPrivTransaction(contractAddress, encodeFunction);
@@ -90,7 +94,7 @@ public class App {
     }
 
     public BigInteger getTimeDocument(String contractAddress, String hash) throws Exception {
-        ProofOfExistence contract = ProofOfExistence.load(contractAddress, besu, transactionManager, getDefaultBesuPrivacyGasProvider());
+        ProofOfExistence contract = getContractInstance(contractAddress);
         BigInteger timeDocument = contract.stamps(stringToBytes(hash, 32)).send();
         return timeDocument;
     }
