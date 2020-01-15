@@ -20,3 +20,5 @@ To test the library you must uncomment each of the tests. Run first the test to 
 ```sh
 $ mvn clean test
 ```
+
+Medium article: https://medium.com/@camilo5972/transacciones-privadas-con-hyperledger-besu-441f0befb6dd
